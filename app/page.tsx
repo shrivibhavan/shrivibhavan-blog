@@ -9,6 +9,14 @@ export default function Home() {
     <div className="max-w-3xl mx-auto px-6 py-20">
       {/* Hero */}
       <div className="mb-20 animate-in">
+        <div className="mb-6 w-16 h-16 rounded-full overflow-hidden border-2 border-[var(--accent)] shadow-sm">
+          <img
+            src="/vibhavan.jpg"
+            alt="Shrivibhavan"
+            className="w-full h-full object-cover"
+            style={{ objectPosition: '50% 12%' }}
+          />
+        </div>
         <p className="text-sm font-mono mb-4 tracking-wider uppercase" style={{ color: 'var(--accent)' }}>
           Full-Stack Dev · Cloud · AI
         </p>

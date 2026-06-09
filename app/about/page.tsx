@@ -3,16 +3,26 @@ export const metadata = { title: 'About — Shrivibhavan' }
 export default function About() {
   return (
     <div className="max-w-3xl mx-auto px-6 py-16">
-      <div className="animate-in">
-        <h1
-          className="font-['Playfair_Display'] text-4xl font-bold mb-2"
-          style={{ color: 'var(--text-heading)' }}
-        >
-          About
-        </h1>
-        <p className="mb-8" style={{ color: 'var(--text-faint)' }}>
-          The human behind the code
-        </p>
+      <div className="flex flex-col-reverse sm:flex-row sm:items-center justify-between gap-6 mb-10 animate-in">
+        <div>
+          <h1
+            className="font-['Playfair_Display'] text-4xl font-bold mb-2"
+            style={{ color: 'var(--text-heading)' }}
+          >
+            About
+          </h1>
+          <p style={{ color: 'var(--text-faint)' }}>
+            The human behind the code
+          </p>
+        </div>
+        <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-2 border-[var(--accent)] shadow-md flex-shrink-0">
+          <img
+            src="/vibhavan.jpg"
+            alt="Shrivibhavan"
+            className="w-full h-full object-cover"
+            style={{ objectPosition: '50% 12%' }}
+          />
+        </div>
       </div>
       <div className="prose-blog animate-in animate-in-delay-1">
         <p>
