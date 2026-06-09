@@ -14,7 +14,6 @@ export default function Home() {
             src="/vibhavan.jpg"
             alt="Shrivibhavan"
             className="w-full h-full object-cover"
-            style={{ objectPosition: '50% 12%' }}
           />
         </div>
         <p className="text-sm font-mono mb-4 tracking-wider uppercase" style={{ color: 'var(--accent)' }}>

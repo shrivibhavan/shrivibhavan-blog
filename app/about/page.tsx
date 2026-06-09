@@ -20,7 +20,6 @@ export default function About() {
             src="/vibhavan.jpg"
             alt="Shrivibhavan"
             className="w-full h-full object-cover"
-            style={{ objectPosition: '50% 12%' }}
           />
         </div>
       </div>
