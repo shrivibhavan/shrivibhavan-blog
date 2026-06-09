@@ -1,0 +1,71 @@
+---
+title: "I've Been Living in Claude Lately"
+date: "2026-06-08"
+excerpt: "Not a benchmark post. Just what it's actually like to use Claude as a daily dev tool."
+tags: ["ai", "claude", "dev"]
+---
+
+## I didn't plan to switch
+
+I had a workflow. ChatGPT for quick questions, Copilot for autocomplete, Stack Overflow for guilt. Then I started using Claude for one annoying refactor — the kind where you need something to read six files and not hallucinate a seventh.
+
+It didn't break. It didn't invent a `utils/helperService.ts` that doesn't exist. It just... did the thing.
+
+So I kept going.
+
+## What Claude is good at (for me)
+
+**Reading code before writing it.** Claude tends to ask fewer questions and make fewer assumptions when the context is already in the prompt. Paste the file, describe the goal, get a diff-shaped answer instead of a lecture.
+
+**Long-context work.** Big PR reviews, migration plans, "explain this codebase to me" sessions. When the window is large enough to hold the actual project, the answers feel less like generic AI advice and more like a patient senior dev.
+
+**Writing that sounds human.** Blog posts, READMEs, commit messages, apology emails to your past self for that regex. Claude's default tone is less "corporate chatbot" and more "person who has shipped things."
+
+**Saying "I don't know."** Not always — no model is perfect — but Claude pushes back more often when a request is underspecified. That's underrated.
+
+## Where it still trips me up
+
+- **Over-cautious refactors** — sometimes it wraps everything in abstractions you didn't ask for
+- **Stale API knowledge** — always verify SDK syntax against docs (same rule for every LLM)
+- **Confidence** — it can sound right while being subtly wrong; you still need to run the code
+
+The fix isn't "trust it less." It's treat it like a fast junior with perfect recall and occasional main character energy.
+
+## Claude vs the rest (my unscientific take)
+
+| Use case | What I reach for |
+|----------|------------------|
+| Quick syntax lookup | Either works |
+| Multi-file refactor | Claude |
+| Brainstorming product ideas | Claude |
+| Autocomplete in the editor | Copilot / Cursor |
+| "Roast my architecture" | Claude, unfortunately |
+
+I'm not loyal to one model the way people are loyal to Vim. I care about friction. Right now Claude has the least friction for the work I do most: reading, writing, and restructuring code.
+
+## The real shift
+
+The interesting part isn't that Claude is smart. All the frontier models are smart enough to be dangerous.
+
+The shift is **how often I stop context-switching**. Fewer tabs. Fewer "let me grep the repo real quick" detours. More time in one thread that actually remembers what we were doing twenty messages ago.
+
+That's the product. Not magic — momentum.
+
+## How I use it day to day
+
+1. **Morning:** paste yesterday's error log, ask for a ranked list of what to fix first
+2. **During dev:** "here's the route, here's the test failure, don't touch the auth middleware"
+3. **Before deploy:** "review this diff like you're the on-call engineer"
+4. **After deploy:** "write the blog post I should've written before I shipped" (hi)
+
+## Should you use Claude?
+
+If you build software and you haven't tried a long-context session on a real task — not a toy prompt — give it a shot.
+
+Don't ask "is Claude better than X?" Ask: **does it remove a step I hate?**
+
+For me, right now, yes.
+
+---
+
+*What's your daily driver — Claude, GPT, Cursor, something else? I'm curious, but also this is a blog post not a Twitter poll so I'll just leave this here.*
