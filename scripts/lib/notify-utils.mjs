@@ -48,19 +48,26 @@ export async function getNotifiedSlugsFromResend(resend) {
   const notified = new Set()
   let after
 
-  do {
-    const options = after ? { after } : undefined
-    const { data, error } = await resend.broadcasts.list(options)
-    if (error) throw new Error(`Failed to list broadcasts: ${error.message}`)
-
-    for (const broadcast of data?.data ?? []) {
-      if (broadcast.name?.startsWith('post:')) {
-        notified.add(broadcast.name.slice('post:'.length))
+  try {
+    do {
+      const options = after ? { after } : undefined
+      const { data, error } = await resend.broadcasts.list(options)
+      if (error) {
+        console.warn(`auto-notify: could not list broadcasts (${error.message}). Falling back to local seed list.`)
+        return notified
       }
-    }
 
-    after = data?.has_more ? data.data.at(-1)?.id : undefined
-  } while (after)
+      for (const broadcast of data?.data ?? []) {
+        if (broadcast.name?.startsWith('post:')) {
+          notified.add(broadcast.name.slice('post:'.length))
+        }
+      }
+
+      after = data?.has_more ? data.data.at(-1)?.id : undefined
+    } while (after)
+  } catch (err) {
+    console.warn(`auto-notify: broadcast list unavailable (${err.message}). Falling back to local seed list.`)
+  }
 
   return notified
 }
