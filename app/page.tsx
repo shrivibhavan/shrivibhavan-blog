@@ -8,20 +8,25 @@ export default function Home() {
   return (
     <div className="max-w-3xl mx-auto px-6 py-20">
       {/* Hero */}
-      <div className="mb-20">
-        <p className="text-[#c4622d] text-sm font-mono mb-4 tracking-wider uppercase">Full-Stack Dev · Cloud · AI</p>
-        <h1 className="font-['Playfair_Display'] text-5xl font-bold leading-[1.15] text-white/90 mb-6">
+      <div className="mb-20 animate-in">
+        <p className="text-sm font-mono mb-4 tracking-wider uppercase" style={{ color: 'var(--accent)' }}>
+          Full-Stack Dev · Cloud · AI
+        </p>
+        <h1
+          className="font-['Playfair_Display'] text-5xl font-bold leading-[1.15] mb-6"
+          style={{ color: 'var(--text-heading)' }}
+        >
           Building things,<br />writing about it.
         </h1>
-        <p className="text-white/50 text-lg leading-relaxed max-w-xl">
-          I'm Vibhavan — a developer from India, working toward a tech career in Japan. 
+        <p className="text-lg leading-relaxed max-w-xl" style={{ color: 'var(--text-muted)' }}>
+          I&apos;m Vibhavan — a developer from India, working toward a tech career in Japan.
           This is where I document what I learn: React, Node.js, AWS, AI agents, and the occasional life update.
         </p>
         <div className="mt-8 flex gap-4">
-          <Link href="/blog" className="px-5 py-2.5 bg-[#c4622d] text-white text-sm rounded-lg hover:bg-[#b3571f] transition-colors">
+          <Link href="/blog" className="btn-primary inline-block text-center no-underline">
             Read the blog
           </Link>
-          <Link href="/about" className="px-5 py-2.5 border border-white/20 text-white/70 text-sm rounded-lg hover:border-white/40 hover:text-white/90 transition-colors">
+          <Link href="/about" className="btn-ghost inline-block text-center no-underline">
             About me
           </Link>
         </div>
@@ -31,37 +36,59 @@ export default function Home() {
       {posts.length > 0 && (
         <section className="mb-20">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="font-['Playfair_Display'] text-2xl text-white/80">Recent Posts</h2>
-            <Link href="/blog" className="text-sm text-[#c4622d] hover:underline underline-offset-4">All posts →</Link>
+            <div>
+              <h2 className="font-['Playfair_Display'] text-2xl" style={{ color: 'var(--text-heading)' }}>
+                Recent Posts
+              </h2>
+              <p className="text-sm mt-1" style={{ color: 'var(--text-faint)' }}>
+                Latest thoughts and deep dives
+              </p>
+            </div>
+            <Link
+              href="/blog"
+              className="text-sm hover:underline underline-offset-4"
+              style={{ color: 'var(--accent)' }}
+            >
+              All posts →
+            </Link>
           </div>
-          <div className="space-y-6">
-            {posts.map(post => (
-              <PostCard key={post.slug} post={post} />
+          <div className="space-y-4">
+            {posts.map((post, i) => (
+              <div key={post.slug} className={`animate-in animate-in-delay-${i + 1}`}>
+                <PostCard post={post} />
+              </div>
             ))}
           </div>
         </section>
       )}
 
       {/* Newsletter */}
-      <NewsletterForm />
+      <div className="animate-in">
+        <NewsletterForm />
+      </div>
     </div>
   )
 }
 
 function PostCard({ post }: { post: ReturnType<typeof getAllPosts>[0] }) {
   return (
-    <Link href={`/blog/${post.slug}`} className="group block">
-      <article className="border border-white/10 rounded-xl p-5 hover:border-white/20 hover:bg-white/[0.02] transition-all">
-        <div className="flex items-center gap-3 text-xs text-white/30 mb-2 font-mono">
+    <Link href={`/blog/${post.slug}`} className="group block no-underline">
+      <article className="card">
+        <div className="flex items-center gap-3 text-xs mb-2 font-mono" style={{ color: 'var(--text-faint)' }}>
           <span>{new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
           <span>·</span>
           <span>{post.readingTime}</span>
         </div>
-        <h3 className="text-white/80 font-medium text-lg group-hover:text-white transition-colors mb-1">{post.title}</h3>
-        <p className="text-white/40 text-sm leading-relaxed">{post.excerpt}</p>
+        <h3
+          className="font-medium text-lg mb-1 transition-colors"
+          style={{ color: 'var(--text)' }}
+        >
+          {post.title}
+        </h3>
+        <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>{post.excerpt}</p>
         <div className="mt-3 flex gap-2">
           {post.tags.map(tag => (
-            <span key={tag} className="text-xs px-2 py-0.5 rounded-full border border-white/10 text-white/30">{tag}</span>
+            <span key={tag} className="tag">{tag}</span>
           ))}
         </div>
       </article>
