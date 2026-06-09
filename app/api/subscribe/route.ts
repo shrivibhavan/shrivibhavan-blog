@@ -6,171 +6,92 @@ function buildWelcomeEmail(firstName?: string) {
 
   return `
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="x-apple-disable-message-reformatting" />
-  <title>Welcome to Shrivibhavan</title>
-  <!--[if mso]>
-  <noscript>
-    <xml>
-      <o:OfficeDocumentSettings>
-        <o:AllowPNG/>
-        <o:PixelsPerInch>96</o:PixelsPerInch>
-      </o:OfficeDocumentSettings>
-    </xml>
-  </noscript>
-  <![endif]-->
+  <title>Welcome</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-    
-    * { margin: 0; padding: 0; }
-    body, table, td { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
-    
     @media only screen and (max-width: 600px) {
-      .email-container { width: 100% !important; }
-      .email-padding { padding: 24px 20px !important; }
-      .hero-text { font-size: 26px !important; }
+      .container { width: 100% !important; padding: 24px 20px !important; }
     }
   </style>
 </head>
-<body style="margin:0;padding:0;background-color:#050505;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;">
+<body style="margin:0;padding:0;background-color:#f4f4f2;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%;">
 
-  <!-- Preheader (hidden preview text) -->
-  <div style="display:none;font-size:1px;color:#050505;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;">
-    Hey ${name}! Welcome to my corner of the internet. Here's what to expect →
+  <div style="display:none;font-size:1px;color:#f4f4f2;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;">
+    Hey ${name} — thanks for subscribing. Here's a quick hello.
   </div>
 
-  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color:#050505;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color:#f4f4f2;">
     <tr>
-      <td align="center" style="padding:32px 16px;">
-
-        <!-- Email Container -->
-        <table role="presentation" class="email-container" width="100%" cellspacing="0" cellpadding="0" style="max-width:540px;">
+      <td align="center" style="padding:40px 16px;">
+        <table role="presentation" class="container" width="100%" cellspacing="0" cellpadding="0" style="max-width:520px;background-color:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.06);">
           
-          <!-- Logo Row -->
+          <!-- Thin accent line -->
           <tr>
-            <td align="center" style="padding:0 0 28px 0;">
-              <table role="presentation" cellspacing="0" cellpadding="0">
-                <tr>
-                  <td style="font-family:Georgia,'Times New Roman',serif;font-size:20px;font-weight:700;color:#e8e6e0;letter-spacing:-0.02em;">
-                    shrivibhavan<span style="color:#c4622d;">.</span>
-                  </td>
-                </tr>
-              </table>
-            </td>
+            <td style="height:3px;background-color:#c4622d;"></td>
           </tr>
 
-          <!-- Main Card -->
+          <!-- Content -->
           <tr>
-            <td>
-              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color:#0e0e0e;border-radius:20px;border:1px solid #1a1a1a;overflow:hidden;">
-                
-                <!-- Gradient accent bar -->
-                <tr>
-                  <td style="height:4px;background:linear-gradient(90deg, #c4622d 0%, #e8943d 50%, #c4622d 100%);"></td>
-                </tr>
+            <td style="padding:36px 32px;">
 
-                <!-- Hero Section -->
+              <!-- Logo -->
+              <p style="margin:0 0 28px 0;font-family:Georgia,'Times New Roman',serif;font-size:18px;font-weight:700;color:#1a1a1a;letter-spacing:-0.01em;">
+                shrivibhavan<span style="color:#c4622d;">.</span>
+              </p>
+
+              <!-- Greeting -->
+              <p style="margin:0 0 16px 0;font-size:16px;line-height:1.6;color:#1a1a1a;">
+                Hey ${name},
+              </p>
+
+              <p style="margin:0 0 16px 0;font-size:15px;line-height:1.7;color:#3a3a38;">
+                Thanks for subscribing — means a lot, genuinely.
+              </p>
+
+              <p style="margin:0 0 16px 0;font-size:15px;line-height:1.7;color:#3a3a38;">
+                I write about things I'm building and learning. Mostly React, Next.js, cloud stuff (AWS, Docker), and lately a lot about AI agents. I'm also documenting my journey of moving to Japan for a tech career, so that shows up too.
+              </p>
+
+              <p style="margin:0 0 16px 0;font-size:15px;line-height:1.7;color:#3a3a38;">
+                I try to keep posts practical — the kind of stuff I wish existed when I was stuck on something at 2am. No filler.
+              </p>
+
+              <p style="margin:0 0 24px 0;font-size:15px;line-height:1.7;color:#3a3a38;">
+                If you want to check out what's already there:
+              </p>
+
+              <!-- Button -->
+              <table role="presentation" cellspacing="0" cellpadding="0" style="margin:0 0 28px 0;">
                 <tr>
-                  <td class="email-padding" style="padding:40px 36px 0 36px;">
-                    <h1 class="hero-text" style="margin:0 0 8px 0;font-family:Georgia,'Times New Roman',serif;font-size:30px;font-weight:700;color:#f5f2ec;line-height:1.2;">
-                      Hey ${name}! 👋
-                    </h1>
-                    <p style="margin:0;font-size:20px;color:#c4622d;font-weight:500;line-height:1.4;">
-                      Welcome to the club.
-                    </p>
+                  <td style="border-radius:8px;background-color:#c4622d;">
+                    <a href="https://shrivibhavan.com/blog" target="_blank" style="display:inline-block;padding:11px 24px;font-size:14px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:8px;">
+                      Browse posts
+                    </a>
                   </td>
                 </tr>
-
-                <!-- Body Content -->
-                <tr>
-                  <td class="email-padding" style="padding:24px 36px 0 36px;">
-                    <p style="margin:0 0 24px 0;font-size:15px;line-height:1.8;color:#a8a5a0;">
-                      I'm really glad you're here. I write about the stuff I'm actually building and learning — no fluff, no clickbait. Just honest dev notes from someone figuring it out in public.
-                    </p>
-                  </td>
-                </tr>
-
-                <!-- What You'll Get Section -->
-                <tr>
-                  <td class="email-padding" style="padding:0 36px;">
-                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color:#141414;border-radius:12px;border:1px solid #1f1f1f;">
-                      <tr>
-                        <td style="padding:20px 24px 8px 24px;">
-                          <p style="margin:0 0 16px 0;font-size:11px;font-weight:700;color:#c4622d;text-transform:uppercase;letter-spacing:0.12em;">
-                            📬 What you'll get
-                          </p>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="padding:0 24px 20px 24px;">
-                          <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
-                            <tr>
-                              <td style="padding:6px 0;font-size:14px;color:#c8c5be;line-height:1.6;">
-                                <span style="display:inline-block;width:24px;text-align:center;">⚡</span> Deep dives on React, Next.js & TypeScript
-                              </td>
-                            </tr>
-                            <tr>
-                              <td style="padding:6px 0;font-size:14px;color:#c8c5be;line-height:1.6;">
-                                <span style="display:inline-block;width:24px;text-align:center;">☁️</span> Cloud & DevOps — AWS, Docker, CI/CD
-                              </td>
-                            </tr>
-                            <tr>
-                              <td style="padding:6px 0;font-size:14px;color:#c8c5be;line-height:1.6;">
-                                <span style="display:inline-block;width:24px;text-align:center;">🤖</span> AI agents, LLM experiments & new tools
-                              </td>
-                            </tr>
-                            <tr>
-                              <td style="padding:6px 0;font-size:14px;color:#c8c5be;line-height:1.6;">
-                                <span style="display:inline-block;width:24px;text-align:center;">🇯🇵</span> Career updates & the road to Japan
-                              </td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-
-                <!-- CTA Button -->
-                <tr>
-                  <td class="email-padding" style="padding:28px 36px 0 36px;" align="center">
-                    <table role="presentation" cellspacing="0" cellpadding="0">
-                      <tr>
-                        <td style="border-radius:12px;background:linear-gradient(135deg, #c4622d 0%, #d4723d 100%);">
-                          <a href="https://shrivibhavan.com/blog" target="_blank" rel="noopener" style="display:inline-block;padding:14px 36px;font-size:14px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:12px;letter-spacing:0.02em;">
-                            Read the latest posts →
-                          </a>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-
-                <!-- Personal note -->
-                <tr>
-                  <td class="email-padding" style="padding:28px 36px 36px 36px;">
-                    <p style="margin:0;font-size:14px;color:#6a6860;line-height:1.7;font-style:italic;">
-                      P.S. — This isn't a one-way street. Hit reply anytime, I read every email and love hearing from readers.
-                    </p>
-                  </td>
-                </tr>
-
               </table>
+
+              <!-- Sign off -->
+              <p style="margin:0 0 4px 0;font-size:15px;line-height:1.7;color:#3a3a38;">
+                Talk soon,
+              </p>
+              <p style="margin:0;font-size:15px;color:#1a1a1a;font-weight:600;">
+                Vibhavan
+              </p>
+
             </td>
           </tr>
 
           <!-- Footer -->
           <tr>
-            <td style="padding:24px 0 0 0;" align="center">
-              <p style="margin:0 0 6px 0;font-size:12px;color:#3a3830;line-height:1.6;">
-                You subscribed at <a href="https://shrivibhavan.com" style="color:#c4622d;text-decoration:none;">shrivibhavan.com</a>
-              </p>
-              <p style="margin:0;font-size:11px;color:#2a2820;line-height:1.6;">
-                Kolhapur, India · Made with ☕ and curiosity
+            <td style="padding:0 32px 28px 32px;border-top:1px solid #eee;">
+              <p style="margin:16px 0 0 0;font-size:12px;color:#999;line-height:1.6;">
+                You signed up at <a href="https://shrivibhavan.com" style="color:#c4622d;text-decoration:none;">shrivibhavan.com</a>. 
+                Hit reply anytime — I read everything.
               </p>
             </td>
           </tr>
@@ -183,6 +104,7 @@ function buildWelcomeEmail(firstName?: string) {
 </body>
 </html>`
 }
+
 
 export async function POST(req: NextRequest) {
   try {
