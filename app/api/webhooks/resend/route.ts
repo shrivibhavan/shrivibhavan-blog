@@ -15,16 +15,30 @@ export async function POST(req: NextRequest) {
 
   let event
   try {
+    const svixId = req.headers.get('svix-id') ?? ''
+    const svixTimestamp = req.headers.get('svix-timestamp') ?? ''
+    const svixSignature = req.headers.get('svix-signature') ?? ''
+    
+    console.log('Webhook verify attempt:', {
+      hasSecret: !!webhookSecret,
+      secretPrefix: webhookSecret?.substring(0, 8),
+      svixId,
+      svixTimestamp,
+      hasSignature: !!svixSignature,
+      payloadLength: payload.length,
+    })
+
     event = resend.webhooks.verify({
       payload,
       headers: {
-        'svix-id': req.headers.get('svix-id') ?? '',
-        'svix-timestamp': req.headers.get('svix-timestamp') ?? '',
-        'svix-signature': req.headers.get('svix-signature') ?? '',
+        'svix-id': svixId,
+        'svix-timestamp': svixTimestamp,
+        'svix-signature': svixSignature,
       } as any,
       webhookSecret,
     })
-  } catch {
+  } catch (err: any) {
+    console.error('Webhook verification error details:', err.message || err)
     return NextResponse.json({ error: 'Invalid webhook signature.' }, { status: 401 })
   }
 
