@@ -1,0 +1,82 @@
+---
+title: "How to Set Up a Custom Domain Email for Free"
+date: "2026-06-09"
+excerpt: "Stop paying monthly fees for Google Workspace or Microsoft 365. How to combine Cloudflare Email Routing and Resend to send and receive custom domain emails for $0."
+tags: ["cloudflare", "email", "resend", "devops"]
+tldr: "A practical guide to setting up a professional custom domain email using Cloudflare Email Routing for inbound forwarding and Resend SMTP for outbound sending—completely free."
+---
+
+## The Problem with Paid Mailboxes
+
+Getting a custom domain email like `hello@shrivibhavan.com` is essential for building a professional presence. However, premium mailbox services like Google Workspace or Microsoft 365 cost at least $6 to $12 per user per month. If you manage multiple domains, this cost quickly stacks up.
+
+Instead of paying recurring subscription fees for basic mailboxes, you can build a robust, production-grade email forwarding and SMTP sending pipeline for **$0/month** (only paying for your domain name registration).
+
+---
+
+## The Architecture
+
+To get a fully functional custom email address (both sending and receiving), we split the mail delivery into two parts:
+
+1. **Receiving Email (Inbound)**: We use **Cloudflare Email Routing** to capture incoming mail to `hello@domain.com` and forward it to a free personal Gmail address.
+2. **Sending Email (Outbound/SMTP)**: We use **Resend** to send emails from `hello@domain.com` via their SMTP server, using Gmail's custom "Send mail as" settings.
+
+```
+[Inbound Email]  ──> [Cloudflare Email Routing] ──> [Personal Gmail Inbox]
+[Outbound Email] ──> [Gmail "Send Mail As"]     ──> [Resend SMTP Server] ──> [Recipient]
+```
+
+---
+
+## Step 1: Receiving Emails with Cloudflare
+
+If your domain's DNS is managed by Cloudflare, setting up email routing takes under 5 minutes:
+
+1. Go to your domain dashboard on **Cloudflare**.
+2. Navigate to **Email** > **Email Routing** and click **Get started**.
+3. Under **Destination addresses**, add your personal Gmail address and verify it.
+4. Under **Routing rules**, click **Create rule**:
+   - **Custom address**: `hello` (or `*` to catch-all)
+   - **Action**: **Forward to**
+   - **Destination**: Select your verified Gmail address.
+5. Click **Enable** and let Cloudflare automatically add the necessary MX records to your DNS settings.
+
+Now, any email sent to `hello@yourdomain.com` will instantly land in your Gmail inbox!
+
+---
+
+## Step 2: Authorizing Outbound Sending with Resend
+
+To send emails that actually look like they come from `hello@yourdomain.com` (and don't end up in spam folders), we need an outbound SMTP server. Resend provides a developer-friendly email API and SMTP credentials with a generous free tier of 3,000 emails/month.
+
+1. Sign up at [resend.com](https://resend.com).
+2. Go to **Domains** > **Add Domain** and enter `yourdomain.com`.
+3. Add the provided DKIM and SPF TXT records to your Cloudflare DNS settings. This tells email servers that Resend is authorized to send emails on your behalf.
+4. Wait for domain verification to succeed (usually instant on Cloudflare).
+5. Go to **API Keys** and click **Create API Key** with "Sending" permissions. Copy the key (e.g., `re_12345`).
+
+---
+
+## Step 3: Connecting Resend SMTP to Gmail
+
+Finally, we configure Gmail to send emails using Resend's SMTP server so you can compose and reply directly from your personal Gmail interface:
+
+1. Open Gmail, go to **Settings** (gear icon) > **See all settings** > **Accounts and Import**.
+2. Scroll to **Send mail as** and click **Add another email address**.
+3. Enter your name and custom domain email (e.g., `hello@yourdomain.com`). Uncheck **Treat as an alias** and click **Next Step**.
+4. Configure the SMTP server settings:
+   - **SMTP Server**: `smtp.resend.com`
+   - **Port**: `587` (or `465` with SSL)
+   - **Username**: `resend` (this is literally the string `resend` for all accounts)
+   - **Password**: Paste your Resend API Key (e.g., `re_12345...`)
+   - **Connection**: Secured connection using TLS.
+5. Click **Add Account**. Gmail will send a verification code to `hello@yourdomain.com`.
+6. Go to your Gmail inbox (since Cloudflare is already forwarding to it, you'll receive the email there!), copy the confirmation code, paste it into the prompt, and verify.
+
+---
+
+## The Result
+
+You now have a fully functional, professional email suite. When someone emails `hello@yourdomain.com`, it forwards to your Gmail. When you reply, you can select your custom email in the "From" dropdown, and the recipient will see it coming from `hello@yourdomain.com`.
+
+All of this runs automatically, scales easily, and costs exactly **$0/month**.
