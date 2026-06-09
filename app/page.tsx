@@ -17,7 +17,7 @@ export default function Home() {
           />
         </div>
         <p className="text-sm font-mono mb-4 tracking-wider uppercase" style={{ color: 'var(--accent)' }}>
-          Full-Stack Dev · Cloud · AI
+          Developer
         </p>
         <h1
           className="font-['Playfair_Display'] text-5xl font-bold leading-[1.15] mb-6"
@@ -26,8 +26,8 @@ export default function Home() {
           Building things,<br />writing about it.
         </h1>
         <p className="text-lg leading-relaxed max-w-xl" style={{ color: 'var(--text-muted)' }}>
-          I&apos;m Vibhavan — a developer from India, working toward a tech career in Japan.
-          This is where I document what I learn: React, Node.js, AWS, AI agents, and the occasional life update.
+          I&apos;m Shrivi — a developer who works across any technology. 
+          This is where I document what I build and what I learn along the way.
         </p>
         <div className="mt-8 flex gap-4">
           <Link href="/blog" className="btn-primary inline-block text-center no-underline">

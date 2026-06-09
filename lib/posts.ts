@@ -13,6 +13,7 @@ export type Post = {
   tags: string[]
   readingTime: string
   content: string
+  tldr?: string
 }
 
 export function getAllPosts(): Post[] {
@@ -31,6 +32,7 @@ export function getAllPosts(): Post[] {
         tags: data.tags ?? [],
         readingTime: readingTime(content).text,
         content,
+        tldr: data.tldr ?? '',
       }
     })
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
@@ -49,5 +51,6 @@ export function getPostBySlug(slug: string): Post | null {
     tags: data.tags ?? [],
     readingTime: readingTime(content).text,
     content,
+    tldr: data.tldr ?? '',
   }
 }

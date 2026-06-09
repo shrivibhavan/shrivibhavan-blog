@@ -10,7 +10,7 @@ interface Photo {
 export default function PhotoGallery({ photos }: { photos: Photo[] }) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
   const [likedPhotos, setLikedPhotos] = useState<Record<string, boolean>>({})
-  const [liking, setLiking] = useState<Record<string, boolean>>({})
+  const [newlyLiked, setNewlyLiked] = useState<Record<string, boolean>>({})
 
   // Load liked status from localStorage
   useEffect(() => {
@@ -29,12 +29,15 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
     const key = photo.fileName
     if (likedPhotos[key]) return // already liked
 
-    // 1. Optimistic UI update: Mark as liked instantly in the UI
+    // 1. Mark as liked in local state and localStorage
     const nextLiked = { ...likedPhotos, [key]: true }
     setLikedPhotos(nextLiked)
     localStorage.setItem('vibhavan-photos-liked', JSON.stringify(nextLiked))
 
-    // 2. Trigger the Resend email notification in the background
+    // 2. Track as newly liked in this session to trigger animation
+    setNewlyLiked((prev) => ({ ...prev, [key]: true }))
+
+    // 3. Trigger the Resend email notification in the background
     try {
       await fetch('/api/like', {
         method: 'POST',
@@ -68,7 +71,6 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
         {photos.map((photo, index) => {
           const isLiked = likedPhotos[photo.fileName]
-          const isLiking = liking[photo.fileName]
           return (
             <div
               key={photo.fileName}
@@ -96,7 +98,7 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
                 </div>
                 <button
                   onClick={(e) => handleLike(photo, e)}
-                  disabled={isLiked || isLiking}
+                  disabled={isLiked}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-medium transition-all ${
                     isLiked
                       ? 'border-red-200/50 bg-red-50/10 text-red-500 cursor-default'
@@ -104,8 +106,10 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
                   }`}
                 >
                   <svg
-                    className={`w-4 h-4 transition-transform ${
-                      isLiked ? 'scale-110 fill-current' : 'group-hover:scale-110'
+                    className={`w-4 h-4 ${
+                      newlyLiked[photo.fileName] ? 'animate-heart-pop' : ''
+                    } ${
+                      isLiked ? 'fill-current' : 'transition-transform group-hover:scale-110'
                     }`}
                     fill={isLiked ? 'currentColor' : 'none'}
                     stroke="currentColor"
@@ -118,7 +122,7 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
                       d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
                     />
                   </svg>
-                  <span>{isLiked ? 'Liked! 📩' : 'Like'}</span>
+                  <span>{isLiked ? 'Liked' : 'Like'}</span>
                 </button>
               </div>
             </div>
@@ -188,7 +192,6 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
           {/* Active Image container */}
           <div
             className="max-w-[90vw] max-h-[80vh] flex flex-col items-center gap-4"
-            onClick={(e) => e.stopPropagation()}
           >
             <img
               src={photos[lightboxIndex].src}

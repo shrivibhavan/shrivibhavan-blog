@@ -10,97 +10,37 @@ function buildWelcomeEmail(firstName?: string) {
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Welcome</title>
-  <style>
-    @media only screen and (max-width: 600px) {
-      .container { width: 100% !important; padding: 24px 20px !important; }
-    }
-  </style>
 </head>
-<body style="margin:0;padding:0;background-color:#f4f4f2;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%;">
+<body style="margin:0;padding:24px;background-color:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%;color:#1a1a1a;">
+  <div style="max-width:520px;margin:0 auto;font-size:16px;line-height:1.6;color:#1a1a1a;border:1px solid #eee;border-radius:12px;padding:32px;box-shadow:0 1px 4px rgba(0,0,0,0.04);">
+    
+    <!-- Header with Logo and Profile Photo -->
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-bottom:28px;">
+      <tr>
+        <td style="vertical-align:middle;">
+          <p style="margin:0;font-family:Georgia,'Times New Roman',serif;font-size:18px;font-weight:700;color:#1a1a1a;letter-spacing:-0.01em;">
+            shrivibhavan<span style="color:#c4622d;">.</span>
+          </p>
+        </td>
+        <td align="right" style="vertical-align:middle;">
+          <img src="https://shrivibhavan.com/vibhavan.jpg" alt="Vibhavan" width="48" height="48" style="display:block;width:48px;height:48px;border-radius:50%;object-fit:cover;border:1px solid #e5e5e3;" />
+        </td>
+      </tr>
+    </table>
 
-  <div style="display:none;font-size:1px;color:#f4f4f2;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;">
-    Hey ${name} — thanks for subscribing. Here's a quick hello.
+    <p style="margin:0 0 16px 0;">Hey ${name} 👋,</p>
+    
+    <p style="margin:0 0 24px 0;">Thanks for subscribing to my newsletter. I really appreciate your support!</p>
+    
+    <p style="margin:0 0 4px 0;">Talk soon,</p>
+    <p style="margin:0;font-weight:600;">Shrivibhavan</p>
+    
+    <hr style="border:none;border-top:1px solid #eee;margin:32px 0 16px 0;" />
+    <p style="font-size:12px;color:#999;margin:0;">
+      You subscribed at <a href="https://shrivibhavan.com" style="color:#999;text-decoration:underline;">shrivibhavan.com</a>. If you want to unsubscribe, just reply to this email.
+    </p>
   </div>
-
-  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background-color:#f4f4f2;">
-    <tr>
-      <td align="center" style="padding:40px 16px;">
-        <table role="presentation" class="container" width="100%" cellspacing="0" cellpadding="0" style="max-width:520px;background-color:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.06);">
-          
-          <!-- Thin accent line -->
-          <tr>
-            <td style="height:3px;background-color:#c4622d;"></td>
-          </tr>
-
-          <!-- Content -->
-          <tr>
-            <td style="padding:36px 32px;">
-
-              <!-- Logo -->
-              <p style="margin:0 0 28px 0;font-family:Georgia,'Times New Roman',serif;font-size:18px;font-weight:700;color:#1a1a1a;letter-spacing:-0.01em;">
-                shrivibhavan<span style="color:#c4622d;">.</span>
-              </p>
-
-              <!-- Greeting -->
-              <p style="margin:0 0 16px 0;font-size:16px;line-height:1.6;color:#1a1a1a;">
-                Hey ${name},
-              </p>
-
-              <p style="margin:0 0 16px 0;font-size:15px;line-height:1.7;color:#3a3a38;">
-                Thanks for subscribing — means a lot, genuinely.
-              </p>
-
-              <p style="margin:0 0 16px 0;font-size:15px;line-height:1.7;color:#3a3a38;">
-                I write about things I'm building and learning. Mostly React, Next.js, cloud stuff (AWS, Docker), and lately a lot about AI agents. I'm also documenting my journey of moving to Japan for a tech career, so that shows up too.
-              </p>
-
-              <p style="margin:0 0 16px 0;font-size:15px;line-height:1.7;color:#3a3a38;">
-                I try to keep posts practical — the kind of stuff I wish existed when I was stuck on something at 2am. No filler.
-              </p>
-
-              <p style="margin:0 0 24px 0;font-size:15px;line-height:1.7;color:#3a3a38;">
-                If you want to check out what's already there:
-              </p>
-
-              <!-- Button -->
-              <table role="presentation" cellspacing="0" cellpadding="0" style="margin:0 0 28px 0;">
-                <tr>
-                  <td style="border-radius:8px;background-color:#c4622d;">
-                    <a href="https://shrivibhavan.com/blog" target="_blank" style="display:inline-block;padding:11px 24px;font-size:14px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:8px;">
-                      Browse posts
-                    </a>
-                  </td>
-                </tr>
-              </table>
-
-              <!-- Sign off -->
-              <p style="margin:0 0 4px 0;font-size:15px;line-height:1.7;color:#3a3a38;">
-                Talk soon,
-              </p>
-              <p style="margin:0;font-size:15px;color:#1a1a1a;font-weight:600;">
-                Vibhavan
-              </p>
-
-            </td>
-          </tr>
-
-          <!-- Footer -->
-          <tr>
-            <td style="padding:0 32px 28px 32px;border-top:1px solid #eee;">
-              <p style="margin:16px 0 0 0;font-size:12px;color:#999;line-height:1.6;">
-                You signed up at <a href="https://shrivibhavan.com" style="color:#c4622d;text-decoration:none;">shrivibhavan.com</a>. 
-                Hit reply anytime — I read everything.
-              </p>
-            </td>
-          </tr>
-
-        </table>
-      </td>
-    </tr>
-  </table>
-
 </body>
 </html>`
 }

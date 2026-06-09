@@ -2,6 +2,8 @@ import { notFound } from 'next/navigation'
 import { getAllPosts, getPostBySlug } from '@/lib/posts'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import Link from 'next/link'
+import CrispSummary from '@/components/CrispSummary'
+import SuggestionBox from '@/components/SuggestionBox'
 
 export async function generateStaticParams() {
   return getAllPosts().map(p => ({ slug: p.slug }))
@@ -11,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const post = getPostBySlug(slug)
   if (!post) return {}
-  return { title: `${post.title} — Shrivibhavan`, description: post.excerpt }
+  return { title: `${post.title} — Shrivi`, description: post.excerpt }
 }
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -19,8 +21,35 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const post = getPostBySlug(slug)
   if (!post) notFound()
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    'headline': post.title,
+    'description': post.excerpt,
+    'datePublished': post.date,
+    'author': {
+      '@type': 'Person',
+      'name': 'Shrivibhavan',
+      'url': 'https://shrivibhavan.com',
+    },
+    'publisher': {
+      '@type': 'Person',
+      'name': 'Shrivibhavan',
+      'url': 'https://shrivibhavan.com',
+    },
+    'mainEntityOfPage': {
+      '@type': 'WebPage',
+      '@id': `https://shrivibhavan.com/blog/${post.slug}`,
+    },
+  }
+
   return (
     <div className="max-w-3xl mx-auto px-6 py-16">
+      {/* JSON-LD Structured Data Schema for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Link
         href="/blog"
         className="text-sm transition-colors mb-10 inline-block no-underline"
@@ -47,10 +76,17 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           ))}
         </div>
       </header>
+
+      {/* Dynamic TL;DR Crisp Summary Box */}
+      {post.tldr && <CrispSummary tldr={post.tldr} />}
+
       <hr style={{ borderColor: 'var(--border)' }} className="mb-10" />
-      <div className="prose-blog animate-in animate-in-delay-1">
+      <div className="prose-blog animate-in animate-in-delay-1 mb-10">
         <MDXRemote source={post.content} />
       </div>
+
+      {/* Suggestion and Feedback Box */}
+      <SuggestionBox postSlug={post.slug} postTitle={post.title} />
     </div>
   )
 }

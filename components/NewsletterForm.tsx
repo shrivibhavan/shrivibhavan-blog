@@ -50,7 +50,7 @@ export default function NewsletterForm() {
         Stay in the loop
       </h2>
       <p className="text-sm mb-6" style={{ color: 'var(--text-muted)' }}>
-        Join devs getting insights on React, cloud, AI, and career growth. No spam — just good reads, straight to your inbox.
+        Subscribe to receive my latest posts and reflections, straight to your inbox.
       </p>
 
       {status === 'success' ? (
