@@ -37,10 +37,17 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ received: true, forwarded: false })
   }
 
+  // Extract clean email if format is "Name <email@domain.com>"
+  let cleanFrom = from
+  const emailMatch = from.match(/<([^>]+)>/)
+  if (emailMatch) {
+    cleanFrom = emailMatch[1]
+  }
+
   const { data, error } = await resend.emails.receiving.forward({
     emailId: event.data.email_id,
     to: forwardTo,
-    from,
+    from: cleanFrom,
     passthrough: true,
   })
 
