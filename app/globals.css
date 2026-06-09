@@ -423,10 +423,14 @@
 
 .footer-link {
   color: var(--text-muted);
-  transition: color 0.2s ease;
+  display: inline-block;
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), color 0.15s ease;
 }
 
-.footer-link:hover { color: var(--accent); }
+.footer-link:hover {
+  color: var(--accent);
+  transform: translateY(-2.5px) scale(1.08);
+}
 
 /* Success checkmark */
 .checkmark-circle {

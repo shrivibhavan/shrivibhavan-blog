@@ -29,22 +29,20 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
     const key = photo.fileName
     if (likedPhotos[key]) return // already liked
 
-    setLiking((prev) => ({ ...prev, [key]: true }))
+    // 1. Optimistic UI update: Mark as liked instantly in the UI
+    const nextLiked = { ...likedPhotos, [key]: true }
+    setLikedPhotos(nextLiked)
+    localStorage.setItem('vibhavan-photos-liked', JSON.stringify(nextLiked))
+
+    // 2. Trigger the Resend email notification in the background
     try {
-      const res = await fetch('/api/like', {
+      await fetch('/api/like', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ photoName: photo.name }),
       })
-      if (res.ok) {
-        const nextLiked = { ...likedPhotos, [key]: true }
-        setLikedPhotos(nextLiked)
-        localStorage.setItem('vibhavan-photos-liked', JSON.stringify(nextLiked))
-      }
     } catch (err) {
-      console.error(err)
-    } finally {
-      setLiking((prev) => ({ ...prev, [key]: false }))
+      console.error('Failed to send like notification:', err)
     }
   }
 
