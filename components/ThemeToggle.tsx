@@ -13,15 +13,7 @@ export default function ThemeToggle() {
       title={`Switch to ${isDark ? 'light' : 'dark'} mode`}
     >
       <div className="toggle-track">
-        {/* Orbital particles */}
-        <div className={`toggle-particles ${isDark ? 'particles-moon' : 'particles-sun'}`}>
-          <span className="particle p1" />
-          <span className="particle p2" />
-          <span className="particle p3" />
-          <span className="particle p4" />
-          <span className="particle p5" />
-          <span className="particle p6" />
-        </div>
+
 
         {/* Sun icon */}
         <svg
