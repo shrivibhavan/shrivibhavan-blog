@@ -6,7 +6,6 @@ export default function NewsletterForm() {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
-  const [msg, setMsg] = useState('')
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -21,20 +20,16 @@ export default function NewsletterForm() {
           lastName: lastName.trim() || undefined,
         }),
       })
-      const data = await res.json()
       if (res.ok) {
         setStatus('success')
-        setMsg(firstName.trim() ? `Welcome aboard, ${firstName.trim()}!` : "You're in! Welcome aboard.")
         setEmail('')
         setFirstName('')
         setLastName('')
       } else {
         setStatus('error')
-        setMsg(data.error ?? 'Something went wrong.')
       }
     } catch {
       setStatus('error')
-      setMsg('Network error. Try again.')
     }
   }
 
@@ -54,32 +49,14 @@ export default function NewsletterForm() {
       </p>
 
       {status === 'success' ? (
-        <div className="flex items-center gap-3 animate-in">
-          {/* Animated checkmark */}
-          <svg width="32" height="32" viewBox="0 0 52 52" className="flex-shrink-0">
-            <circle
-              className="checkmark-circle"
-              cx="26" cy="26" r="25"
-              fill="none"
-              stroke="#22c55e"
-              strokeWidth="2"
-            />
-            <path
-              className="checkmark-check"
-              fill="none"
-              stroke="#22c55e"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M14.1 27.2l7.1 7.2 16.7-16.8"
-            />
+        <div className="flex items-center gap-2.5 py-4 animate-in">
+          {/* Green checkmark icon */}
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0">
+            <polyline points="20 6 9 17 4 12" />
           </svg>
-          <div>
-            <p className="text-sm font-medium" style={{ color: '#22c55e' }}>{msg}</p>
-            <p className="text-xs mt-1" style={{ color: 'var(--text-faint)' }}>
-              Check your inbox for a welcome email.
-            </p>
-          </div>
+          <span className="text-sm font-medium" style={{ color: '#22c55e' }}>
+            You&apos;re in! Check your inbox.
+          </span>
         </div>
       ) : (
         <form onSubmit={submit} className="space-y-3">
@@ -91,6 +68,7 @@ export default function NewsletterForm() {
               value={firstName}
               onChange={e => setFirstName(e.target.value)}
               className="input-field"
+              disabled={status === 'loading'}
             />
             <input
               type="text"
@@ -98,6 +76,7 @@ export default function NewsletterForm() {
               value={lastName}
               onChange={e => setLastName(e.target.value)}
               className="input-field"
+              disabled={status === 'loading'}
             />
           </div>
           {/* Email + submit row */}
@@ -109,6 +88,7 @@ export default function NewsletterForm() {
               value={email}
               onChange={e => setEmail(e.target.value)}
               className="input-field flex-1"
+              disabled={status === 'loading'}
             />
             <button
               type="submit"
@@ -126,11 +106,12 @@ export default function NewsletterForm() {
               ) : 'Subscribe'}
             </button>
           </div>
+          {status === 'error' && (
+            <p className="text-xs mt-2" style={{ color: '#ef4444' }}>
+              Something went wrong. Please try again.
+            </p>
+          )}
         </form>
-      )}
-
-      {status === 'error' && (
-        <p className="text-xs mt-3 animate-in" style={{ color: '#ef4444' }}>{msg}</p>
       )}
     </section>
   )

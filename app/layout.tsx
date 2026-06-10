@@ -17,7 +17,16 @@ export const metadata: Metadata = {
     description: 'A personal space documenting what I build and what I learn along the way.',
     url: 'https://shrivibhavan.com',
     siteName: 'shrivibhavan.com',
+    images: [{ url: '/api/og?title=Shrivi+—+Dev+Blog', width: 1200, height: 630 }],
+    type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Shrivi — Dev Blog',
+    description: 'A personal space documenting what I build and what I learn along the way.',
+    images: ['/api/og?title=Shrivi+—+Dev+Blog'],
+  },
+  alternates: { canonical: 'https://shrivibhavan.com' },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -79,7 +88,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </a>
                 {/* Instagram */}
                 <a
-                  href="https://instagram.com/shrivibhavan"
+                  href="https://instagram.com/shrivibhavana"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="footer-link hover-instagram"

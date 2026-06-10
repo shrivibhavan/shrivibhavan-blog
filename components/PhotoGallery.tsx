@@ -192,6 +192,7 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
           {/* Active Image container */}
           <div
             className="max-w-[90vw] max-h-[80vh] flex flex-col items-center gap-4"
+            onClick={(e) => e.stopPropagation()}
           >
             <img
               src={photos[lightboxIndex].src}

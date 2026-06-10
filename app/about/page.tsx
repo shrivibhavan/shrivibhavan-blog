@@ -1,6 +1,12 @@
 import NewsletterForm from '@/components/NewsletterForm'
 
-export const metadata = { title: 'About — Shrivibhavan' }
+export const metadata = {
+  title: 'About — Shrivibhavan',
+  description: 'The human behind the code. Software developer and visual storyteller.',
+  alternates: {
+    canonical: 'https://shrivibhavan.com/about',
+  },
+}
 
 export default function About() {
   return (
@@ -88,7 +94,7 @@ export default function About() {
             <span className="text-sm font-medium transition-colors" style={{ color: 'var(--text-secondary)' }}>X (Twitter)</span>
           </a>
           <a
-            href="https://instagram.com/shrivibhavan"
+            href="https://instagram.com/shrivibhavana"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-3 no-underline group hover-instagram"

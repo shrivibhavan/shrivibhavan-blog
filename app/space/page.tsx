@@ -3,7 +3,10 @@ import SpaceContent from '@/components/SpaceContent'
 
 export const metadata: Metadata = {
   title: 'Space — Shrivibhavan',
-  description: 'A curated collection of my favorite tools, tech, music playlists, and podcasts.',
+  description: 'A curated collection of my favorite tools, tech, playlists, and podcasts.',
+  alternates: {
+    canonical: 'https://shrivibhavan.com/space',
+  },
 }
 
 export default function SpacePage() {

@@ -12,12 +12,12 @@ interface Item {
 
 const items: Item[] = [
   {
-    name: 'Antigravity',
+    name: 'Gemini CLI',
     category: 'Tools & Tech',
-    description: 'An AI-powered agentic pair-programmer developed by Google DeepMind. Great for automated refactoring, codebase research, and task-based code generation.',
-    link: 'https://deepmind.google',
-    icon: '🤖',
-    linkLabel: 'Visit deepmind.google',
+    description: 'Google\'s open-source AI agent that runs in your terminal. Great for codebase exploration, automated file generation, and running agentic dev tasks without leaving the command line.',
+    link: 'https://github.com/google-gemini/gemini-cli',
+    icon: '✦',
+    linkLabel: 'Visit github.com/google-gemini/gemini-cli',
   },
   {
     name: 'Cursor',

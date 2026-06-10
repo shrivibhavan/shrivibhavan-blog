@@ -32,13 +32,24 @@ export default function SuggestionBox({ postSlug, postTitle }: { postSlug: strin
     }
   }
 
+  const isQA = postSlug === 'pixel-perfect-eye'
+  const title = isQA ? "👁️ Spot a Visual Glitch on This Site?" : "Have a suggestion or feedback?"
+  const description = isQA 
+    ? "Put your Design QA eye to the test. If you spotted a 1px misalignment, a stray pixel in a logo, or a rendering bug anywhere on this blog, report it below. Let's dissect the CSS together!" 
+    : "Let me know what you think of this post, or suggest what I should write next."
+  const placeholder = isQA 
+    ? "Describe the visual glitch: where is it located, what is wrong with it, and what should the CSS or HTML fix be? (e.g. 'On the Space page, the mobile navbar has a 1px stray border...')" 
+    : "Type your feedback, topic request, or suggestion here..."
+  const buttonText = isQA ? "Report Glitch" : "Send feedback"
+  const buttonSubmittingText = isQA ? "Reporting..." : "Sending..."
+
   return (
     <div className="mt-16 pt-8 border-t" style={{ borderColor: 'var(--border)' }}>
       <h3 className="font-['Playfair_Display'] text-xl font-bold mb-2" style={{ color: 'var(--text-heading)' }}>
-        Have a suggestion or feedback?
+        {title}
       </h3>
       <p className="text-sm mb-6" style={{ color: 'var(--text-muted)' }}>
-        Let me know what you think of this post, or suggest what I should write next.
+        {description}
       </p>
 
       {status === 'success' ? (
@@ -50,14 +61,16 @@ export default function SuggestionBox({ postSlug, postTitle }: { postSlug: strin
           }}
         >
           <span className="text-lg">✉️</span>
-          <span style={{ color: 'var(--text-heading)' }}>Thank you! Your feedback has been sent directly to Shrivi.</span>
+          <span style={{ color: 'var(--text-heading)' }}>
+            {isQA ? 'Thank you! Your glitch report has been logged and sent to Shrivi.' : 'Thank you! Your feedback has been sent directly to Shrivi.'}
+          </span>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
           <textarea
             value={suggestion}
             onChange={(e) => setSuggestion(e.target.value)}
-            placeholder="Type your feedback, topic request, or suggestion here..."
+            placeholder={placeholder}
             className="input-field min-h-[100px] resize-y"
             disabled={status === 'submitting'}
             required
@@ -68,7 +81,7 @@ export default function SuggestionBox({ postSlug, postTitle }: { postSlug: strin
               className="btn-primary flex items-center gap-2"
               disabled={status === 'submitting' || !suggestion.trim()}
             >
-              {status === 'submitting' ? 'Sending...' : 'Send feedback'}
+              {status === 'submitting' ? buttonSubmittingText : buttonText}
             </button>
             {status === 'error' && (
               <span className="text-xs text-red-500 animate-in">
@@ -81,3 +94,4 @@ export default function SuggestionBox({ postSlug, postTitle }: { postSlug: strin
     </div>
   )
 }
+

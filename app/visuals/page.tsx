@@ -6,6 +6,9 @@ import PhotoGallery from '@/components/PhotoGallery'
 export const metadata: Metadata = {
   title: 'Visuals — Shrivibhavan',
   description: 'Moments captured through my lens. A collection of street photography, landscapes, and visual stories.',
+  alternates: {
+    canonical: 'https://shrivibhavan.com/visuals',
+  },
 }
 
 interface Photo {
