@@ -10,21 +10,21 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const mono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono' })
 
 export const metadata: Metadata = {
-  title: 'Shrivi — Dev Blog',
+  title: 'Shrivibhavan',
   description: 'A personal space documenting what I build and what I learn along the way.',
   openGraph: {
-    title: 'Shrivi — Dev Blog',
+    title: 'Shrivibhavan',
     description: 'A personal space documenting what I build and what I learn along the way.',
     url: 'https://shrivibhavan.com',
     siteName: 'shrivibhavan.com',
-    images: [{ url: '/api/og?title=Shrivi+—+Dev+Blog', width: 1200, height: 630 }],
+    images: [{ url: '/api/og?title=Shrivibhavan', width: 1200, height: 630 }],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Shrivi — Dev Blog',
+    title: 'Shrivibhavan',
     description: 'A personal space documenting what I build and what I learn along the way.',
-    images: ['/api/og?title=Shrivi+—+Dev+Blog'],
+    images: ['/api/og?title=Shrivibhavan'],
   },
   alternates: { canonical: 'https://shrivibhavan.com' },
 }
