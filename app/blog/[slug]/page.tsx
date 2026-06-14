@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       images: [{ url: ogImage, width: 1200, height: 630 }],
       type: 'article',
       publishedTime: post.date,
-      authors: ['Shrivibhavan'],
+      authors: ['Shrivibhavan Deshpande'],
     },
     twitter: {
       card: 'summary_large_image',
@@ -52,12 +52,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     'image': `/api/og?title=${encodeURIComponent(post.title)}`,
     'author': {
       '@type': 'Person',
-      'name': 'Shrivibhavan',
+      'name': 'Shrivibhavan Deshpande',
       'url': 'https://shrivibhavan.com',
     },
     'publisher': {
       '@type': 'Person',
-      'name': 'Shrivibhavan',
+      'name': 'Shrivibhavan Deshpande',
       'url': 'https://shrivibhavan.com',
     },
     'mainEntityOfPage': {
@@ -75,15 +75,19 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <Link
-          href="/blog"
-          className="text-sm transition-colors mb-10 inline-block no-underline"
-          style={{ color: 'var(--text-faint)' }}
-        >
-          ← Back to blog
-        </Link>
+        <div className="flex items-center justify-between mb-10">
+          <Link
+            href="/blog"
+            className="text-sm transition-colors no-underline"
+            style={{ color: 'var(--text-faint)' }}
+          >
+            ← Back to blog
+          </Link>
+        </div>
         <header className="mb-10 animate-in">
-          <div className="flex items-center gap-3 text-xs mb-4 font-mono" style={{ color: 'var(--text-faint)' }}>
+          <div className="flex items-center gap-2 flex-wrap text-xs mb-4 font-mono" style={{ color: 'var(--text-faint)' }}>
+            <span className="font-semibold" style={{ color: 'var(--text-secondary)' }}>By Shrivibhavan Deshpande</span>
+            <span>·</span>
             <span>{new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
             <span>·</span>
             <span>{post.readingTime}</span>

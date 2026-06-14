@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
       </div>
     `
 
-    const { data, error } = await resend.emails.send({
+    const { error } = await resend.emails.send({
       from,
       to: [to],
       subject: `New feedback on: ${postTitle}`,

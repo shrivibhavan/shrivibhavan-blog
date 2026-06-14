@@ -49,14 +49,38 @@ export default function NewsletterForm() {
       </p>
 
       {status === 'success' ? (
-        <div className="flex items-center gap-2.5 py-4 animate-in">
-          {/* Green checkmark icon */}
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0">
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
-          <span className="text-sm font-medium" style={{ color: '#22c55e' }}>
-            You&apos;re in! Check your inbox.
-          </span>
+        <div className="flex items-center gap-3.5 py-4 animate-in">
+          {/* Animated checkmark */}
+          <div className="relative w-9 h-9 flex items-center justify-center rounded-full bg-[#22c55e]/10 border border-[#22c55e]/20 shadow-[0_0_12px_rgba(34,197,94,0.15)] flex-shrink-0">
+            <svg width="24" height="24" viewBox="0 0 52 52" className="flex-shrink-0">
+              <circle
+                className="checkmark-circle"
+                cx="26"
+                cy="26"
+                r="25"
+                fill="none"
+                stroke="#22c55e"
+                strokeWidth="3.5"
+              />
+              <path
+                className="checkmark-check"
+                fill="none"
+                stroke="#22c55e"
+                strokeWidth="4.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M14.1 27.2l7.1 7.2 16.7-16.8"
+              />
+            </svg>
+          </div>
+          <div>
+            <p className="text-sm font-semibold" style={{ color: '#22c55e' }}>
+              You&apos;re in! Welcome aboard.
+            </p>
+            <p className="text-xs mt-0.5" style={{ color: 'var(--text-muted)' }}>
+              Check your inbox for a welcome email.
+            </p>
+          </div>
         </div>
       ) : (
         <form onSubmit={submit} className="space-y-3">

@@ -34,7 +34,7 @@ function buildWelcomeEmail(firstName?: string) {
     <p style="margin:0 0 24px 0;">Thanks for subscribing to my newsletter. I really appreciate your support!</p>
     
     <p style="margin:0 0 4px 0;">Talk soon,</p>
-    <p style="margin:0;font-weight:600;">Shrivibhavan</p>
+    <p style="margin:0;font-weight:600;">Shrivibhavan Deshpande</p>
     
     <hr style="border:none;border-top:1px solid #eee;margin:32px 0 16px 0;" />
     <p style="font-size:12px;color:#999;margin:0;">

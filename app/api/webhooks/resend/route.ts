@@ -34,11 +34,12 @@ export async function POST(req: NextRequest) {
         'svix-id': svixId,
         'svix-timestamp': svixTimestamp,
         'svix-signature': svixSignature,
-      } as any,
+      } as unknown as { id: string; timestamp: string; signature: string },
       webhookSecret,
     })
-  } catch (err: any) {
-    console.error('Webhook verification error details:', err.message || err)
+  } catch (err) {
+    const errorDetails = err instanceof Error ? err.message : String(err)
+    console.error('Webhook verification error details:', errorDetails)
     return NextResponse.json({ error: 'Invalid webhook signature.' }, { status: 401 })
   }
 

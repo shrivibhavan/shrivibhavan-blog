@@ -1,5 +1,6 @@
 import { getAllPosts } from '@/lib/posts'
 import BlogPostList from '@/components/BlogPostList'
+import GuestPitchForm from '@/components/GuestPitchForm'
 
 export const metadata = {
   title: 'Blog — Shrivibhavan',
@@ -25,6 +26,7 @@ export default function BlogPage() {
         </p>
       </div>
       <BlogPostList posts={posts} />
+      <GuestPitchForm />
     </div>
   )
 }

@@ -6,7 +6,7 @@ interface SuggestionBoxProps {
   postTitle: string
 }
 
-export default function SuggestionBox({ postSlug, postTitle }: { postSlug: string, postTitle: string }) {
+export default function SuggestionBox({ postSlug, postTitle }: SuggestionBoxProps) {
   const [suggestion, setSuggestion] = useState('')
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
 
@@ -27,7 +27,7 @@ export default function SuggestionBox({ postSlug, postTitle }: { postSlug: strin
       } else {
         setStatus('error')
       }
-    } catch (err) {
+    } catch {
       setStatus('error')
     }
   }

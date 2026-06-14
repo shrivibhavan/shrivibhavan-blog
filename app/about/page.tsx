@@ -1,4 +1,5 @@
 import NewsletterForm from '@/components/NewsletterForm'
+import Image from 'next/image'
 
 export const metadata = {
   title: 'About — Shrivibhavan',
@@ -24,9 +25,11 @@ export default function About() {
           </p>
         </div>
         <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-2 border-[var(--accent)] shadow-md flex-shrink-0">
-          <img
+          <Image
             src="/vibhavan.jpg"
             alt="Shrivi"
+            width={112}
+            height={112}
             className="w-full h-full object-cover"
           />
         </div>

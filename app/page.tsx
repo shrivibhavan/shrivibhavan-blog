@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { getAllPosts } from '@/lib/posts'
 import NewsletterForm from '@/components/NewsletterForm'
 
@@ -10,9 +11,11 @@ export default function Home() {
       {/* Hero */}
       <div className="mb-20 animate-in">
         <div className="mb-6 w-16 h-16 rounded-full overflow-hidden border-2 border-[var(--accent)] shadow-sm">
-          <img
+          <Image
             src="/vibhavan.jpg"
             alt="Shrivibhavan"
+            width={64}
+            height={64}
             className="w-full h-full object-cover"
           />
         </div>
@@ -93,7 +96,7 @@ function PostCard({ post }: { post: ReturnType<typeof getAllPosts>[0] }) {
           {post.title}
         </h3>
         <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>{post.excerpt}</p>
-        <div className="mt-3 flex gap-2">
+        <div className="mt-3 flex flex-wrap gap-2">
           {post.tags.map(tag => (
             <span key={tag} className="tag">{tag}</span>
           ))}

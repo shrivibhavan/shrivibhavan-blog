@@ -1,6 +1,5 @@
 import { Resend } from 'resend'
 import {
-  broadcastNameForSlug,
   getAllPostSlugs,
   getNotifiedSlugsFromResend,
   getResendConfig,

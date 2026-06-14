@@ -4,47 +4,81 @@ import Link from 'next/link'
 import type { Post } from '@/lib/posts'
 
 export default function BlogPostList({ posts }: { posts: Post[] }) {
-  const allTags = Array.from(new Set(posts.flatMap((p) => p.tags))).sort()
-  const [activeTag, setActiveTag] = useState<string | null>(null)
+  const [searchQuery, setSearchQuery] = useState('')
 
-  const filtered = activeTag
-    ? posts.filter((p) => p.tags.includes(activeTag))
-    : posts
+  const filtered = posts.filter((p) => {
+    const q = searchQuery.toLowerCase().trim()
+    if (!q) return true
+    return (
+      p.title.toLowerCase().includes(q) ||
+      p.excerpt.toLowerCase().includes(q) ||
+      p.tags.some((tag) => tag.toLowerCase().includes(q))
+    )
+  })
 
   return (
     <div>
-      {/* Tag filter pills */}
-      <div className="flex flex-wrap gap-2 mb-8">
-        <button
-          onClick={() => setActiveTag(null)}
-          className={`px-3 py-1 rounded-full text-xs font-medium transition-all cursor-pointer ${
-            activeTag === null
-              ? 'bg-[var(--accent)] text-white'
-              : 'border border-[var(--border)] text-[var(--text-muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]'
-          }`}
-        >
-          All
-        </button>
-        {allTags.map((tag) => (
-          <button
-            key={tag}
-            onClick={() => setActiveTag(tag === activeTag ? null : tag)}
-            className={`px-3 py-1 rounded-full text-xs font-medium transition-all cursor-pointer ${
-              activeTag === tag
-                ? 'bg-[var(--accent)] text-white'
-                : 'border border-[var(--border)] text-[var(--text-muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]'
-            }`}
+      {/* Search Input Container */}
+      <div className="relative mb-10">
+        <div className="absolute inset-y-0 left-3.5 flex items-center pointer-events-none text-[var(--text-faint)]">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            {tag}
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.3-4.3" />
+          </svg>
+        </div>
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Search by topic, tag, or title..."
+          className="input-field py-2.5 w-full text-sm font-sans"
+          style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem' }}
+        />
+        {searchQuery && (
+          <button
+            onClick={() => setSearchQuery('')}
+            className="absolute inset-y-0 right-3.5 flex items-center text-[var(--text-faint)] hover:text-[var(--accent)] transition-colors cursor-pointer"
+            aria-label="Clear search"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
           </button>
-        ))}
+        )}
       </div>
 
       {/* Post list */}
       {filtered.length === 0 ? (
-        <p className="text-center py-12" style={{ color: 'var(--text-faint)' }}>
-          No posts tagged "{activeTag}"
-        </p>
+        <div className="text-center py-16">
+          <p className="mb-4 text-base" style={{ color: 'var(--text-muted)' }}>
+            No posts found matching &quot;{searchQuery}&quot;
+          </p>
+          <button
+            onClick={() => setSearchQuery('')}
+            className="btn-ghost text-xs py-2 px-4 inline-flex items-center gap-1.5"
+          >
+            Clear Search
+          </button>
+        </div>
       ) : (
         <div className="space-y-4">
           {filtered.map((post, i) => (

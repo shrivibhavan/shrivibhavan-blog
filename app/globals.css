@@ -89,7 +89,42 @@
     color: var(--text);
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
-    transition: background-color 0.4s ease, color 0.3s ease;
+  }
+
+  /* Smooth theme transitions */
+  body,
+  header,
+  footer,
+  main,
+  section,
+  nav,
+  article,
+  aside,
+  div,
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  span,
+  a,
+  button,
+  li,
+  ul,
+  ol,
+  blockquote,
+  code,
+  pre,
+  input,
+  textarea,
+  select,
+  svg,
+  hr {
+    transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   ::selection { background: var(--selection-bg); }
@@ -266,7 +301,7 @@
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: var(--shadow-nav);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-link {
@@ -298,7 +333,7 @@
   padding: 1.25rem;
   background: var(--bg-card);
   box-shadow: var(--shadow-card);
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card:hover {
@@ -317,7 +352,7 @@
   box-shadow: var(--shadow-card);
   position: relative;
   overflow: hidden;
-  transition: border-color 0.3s ease, background-color 0.3s ease;
+  transition: border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .newsletter-section::before {
@@ -418,7 +453,7 @@
   border-top: 1px solid var(--border);
   padding: 2rem 0;
   color: var(--text-faint);
-  transition: border-color 0.3s ease, color 0.3s ease;
+  transition: border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .footer-link {
@@ -506,7 +541,20 @@
   }
   .prose-blog li { margin-bottom: 0.4rem; line-height: 1.7; }
   .prose-blog hr { border-color: var(--border); margin: 2rem 0; }
-  .prose-blog img { border-radius: 8px; max-width: 100%; }
+  .prose-blog img {
+    border-radius: 12px;
+    max-width: 100%;
+    height: auto;
+    margin: 2.5rem auto;
+    display: block;
+    box-shadow: 0 4px 24px var(--border);
+    border: 1px solid var(--border);
+  }
+  @media (min-width: 768px) {
+    .prose-blog img {
+      max-width: 80%;
+    }
+  }
 }
 
 /* ============================================

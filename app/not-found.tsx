@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function NotFound() {
   return (
     <div className="max-w-3xl mx-auto px-6 py-32 flex flex-col items-center text-center">
@@ -16,12 +18,12 @@ export default function NotFound() {
       <p className="text-base mb-10" style={{ color: 'var(--text-muted)' }}>
         This page doesn&apos;t exist or has been moved.
       </p>
-      <a
+      <Link
         href="/"
         className="btn-primary no-underline"
       >
         Back to home
-      </a>
+      </Link>
     </div>
   )
 }

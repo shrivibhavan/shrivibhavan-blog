@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 
 interface Photo {
   src: string
@@ -8,7 +9,6 @@ interface Photo {
 }
 
 export default function PhotoGallery({ photos }: { photos: Photo[] }) {
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
   const [likedPhotos, setLikedPhotos] = useState<Record<string, boolean>>({})
   const [newlyLiked, setNewlyLiked] = useState<Record<string, boolean>>({})
 
@@ -16,28 +16,20 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
   useEffect(() => {
     const saved = localStorage.getItem('vibhavan-photos-liked')
     if (saved) {
-      try {
-        setLikedPhotos(JSON.parse(saved))
-      } catch (e) {
-        console.error(e)
-      }
+      setTimeout(() => {
+        try { setLikedPhotos(JSON.parse(saved)) } catch (e) { console.error(e) }
+      }, 0)
     }
   }, [])
 
   const handleLike = async (photo: Photo, e: React.MouseEvent) => {
-    e.stopPropagation() // prevent opening lightbox
+    e.stopPropagation()
     const key = photo.fileName
-    if (likedPhotos[key]) return // already liked
-
-    // 1. Mark as liked in local state and localStorage
+    if (likedPhotos[key]) return
     const nextLiked = { ...likedPhotos, [key]: true }
     setLikedPhotos(nextLiked)
     localStorage.setItem('vibhavan-photos-liked', JSON.stringify(nextLiked))
-
-    // 2. Track as newly liked in this session to trigger animation
     setNewlyLiked((prev) => ({ ...prev, [key]: true }))
-
-    // 3. Trigger the Resend email notification in the background
     try {
       await fetch('/api/like', {
         method: 'POST',
@@ -49,40 +41,23 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
     }
   }
 
-  // Keyboard navigation for Lightbox
-  useEffect(() => {
-    if (lightboxIndex === null) return
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setLightboxIndex(null)
-      if (e.key === 'ArrowRight') {
-        setLightboxIndex((prev) => (prev !== null && prev < photos.length - 1 ? prev + 1 : 0))
-      }
-      if (e.key === 'ArrowLeft') {
-        setLightboxIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : photos.length - 1))
-      }
-    }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [lightboxIndex, photos])
-
   return (
     <div>
       {/* Photo Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-        {photos.map((photo, index) => {
+        {photos.map((photo) => {
           const isLiked = likedPhotos[photo.fileName]
           return (
             <div
               key={photo.fileName}
               className="card overflow-hidden group flex flex-col justify-between"
             >
-              <div
-                className="relative aspect-[4/3] overflow-hidden cursor-pointer"
-                onClick={() => setLightboxIndex(index)}
-              >
-                <img
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <Image
                   src={photo.src}
                   alt={photo.name}
+                  width={400}
+                  height={300}
                   className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-[1.02]"
                   loading="lazy"
                 />
@@ -106,9 +81,7 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
                   }`}
                 >
                   <svg
-                    className={`w-4 h-4 ${
-                      newlyLiked[photo.fileName] ? 'animate-heart-pop' : ''
-                    } ${
+                    className={`w-4 h-4 ${newlyLiked[photo.fileName] ? 'animate-heart-pop' : ''} ${
                       isLiked ? 'fill-current' : 'transition-transform group-hover:scale-110'
                     }`}
                     fill={isLiked ? 'currentColor' : 'none'}
@@ -129,80 +102,6 @@ export default function PhotoGallery({ photos }: { photos: Photo[] }) {
           )
         })}
       </div>
-
-      {/* Lightbox Modal */}
-      {lightboxIndex !== null && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-sm transition-all duration-300"
-          onClick={() => setLightboxIndex(null)}
-        >
-          {/* Close button */}
-          <button
-            className="absolute top-6 right-6 text-white/70 hover:text-white p-2 rounded-full hover:bg-white/10 transition-colors cursor-pointer"
-            onClick={() => setLightboxIndex(null)}
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-
-          {/* Navigation keys */}
-          <button
-            className="absolute left-6 text-white/70 hover:text-white p-3 rounded-full hover:bg-white/10 transition-colors cursor-pointer"
-            onClick={(e) => {
-              e.stopPropagation()
-              setLightboxIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : photos.length - 1))
-            }}
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-
-          <button
-            className="absolute right-6 text-white/70 hover:text-white p-3 rounded-full hover:bg-white/10 transition-colors cursor-pointer"
-            onClick={(e) => {
-              e.stopPropagation()
-              setLightboxIndex((prev) => (prev !== null && prev < photos.length - 1 ? prev + 1 : 0))
-            }}
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-
-          {/* Active Image container */}
-          <div
-            className="max-w-[90vw] max-h-[80vh] flex flex-col items-center gap-4"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <img
-              src={photos[lightboxIndex].src}
-              alt={photos[lightboxIndex].name}
-              className="max-w-full max-h-[70vh] object-contain rounded-lg shadow-2xl"
-            />
-            <p className="text-white/80 font-medium text-lg">{photos[lightboxIndex].name}</p>
-          </div>
-        </div>
-      )}
     </div>
   )
 }

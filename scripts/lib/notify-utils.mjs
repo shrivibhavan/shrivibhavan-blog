@@ -1,7 +1,6 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import { Resend } from 'resend'
 
 export function loadEnv() {
   const envPath = path.join(process.cwd(), '.env.local')
