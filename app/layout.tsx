@@ -4,6 +4,7 @@ import './globals.css'
 import Navbar from '@/components/Navbar'
 import ThemeProvider from '@/components/ThemeProvider'
 import CodeBlockCopy from '@/components/CodeBlockCopy'
+import PageTransition from '@/components/PageTransition'
 
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' })
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
@@ -44,7 +45,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider>
           <CodeBlockCopy />
           <Navbar />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1">
+            <PageTransition>{children}</PageTransition>
+          </main>
           <footer className="footer">
             <div className="max-w-3xl mx-auto px-6 flex flex-col items-center gap-4">
               <div className="flex items-center gap-4">

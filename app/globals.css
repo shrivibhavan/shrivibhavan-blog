@@ -488,6 +488,36 @@
 .animate-in-delay-1 { animation-delay: 0.1s; }
 .animate-in-delay-2 { animation-delay: 0.2s; }
 .animate-in-delay-3 { animation-delay: 0.3s; }
+.animate-in-delay-4 { animation-delay: 0.4s; }
+.animate-in-delay-5 { animation-delay: 0.5s; }
+
+/* Smooth underline hover for inline links */
+.prose-blog a {
+  position: relative;
+  text-decoration: none;
+}
+.prose-blog a::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+.prose-blog a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Subtle image reveal on scroll */
+.prose-blog img {
+  opacity: 0;
+  animation: fadeInUp 0.5s ease 0.1s forwards;
+}
 
 /* ============================================
    PROSE — Blog Content
