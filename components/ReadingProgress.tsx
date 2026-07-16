@@ -32,7 +32,7 @@ export default function ReadingProgress() {
         width: `${progress}%`,
         height: '2px',
         backgroundColor: 'var(--accent)',
-        zIndex: 50,
+        zIndex: 60,
         transition: 'width 0.1s ease-out',
       }}
     />

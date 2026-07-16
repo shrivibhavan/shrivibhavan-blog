@@ -5,7 +5,6 @@ import Link from 'next/link'
 import CrispSummary from '@/components/CrispSummary'
 import SuggestionBox from '@/components/SuggestionBox'
 import ReadingProgress from '@/components/ReadingProgress'
-import ViewCounter from '@/components/ViewCounter'
 
 export async function generateStaticParams() {
   return getAllPosts().map(p => ({ slug: p.slug }))
@@ -92,8 +91,6 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             <span>{new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
             <span>·</span>
             <span>{post.readingTime}</span>
-            <span>·</span>
-            <ViewCounter slug={post.slug} />
           </div>
           <h1
             className="font-['Playfair_Display'] text-4xl font-bold leading-tight mb-4"
