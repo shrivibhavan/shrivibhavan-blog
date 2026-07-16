@@ -23,8 +23,6 @@ export default function ReadingProgress() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  if (progress === 0) return null
-
   return (
     <div
       style={{
