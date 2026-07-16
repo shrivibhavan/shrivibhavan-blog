@@ -23,6 +23,8 @@ export default function ReadingProgress() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  if (progress === 0) return null
+
   return (
     <div
       style={{
@@ -30,11 +32,13 @@ export default function ReadingProgress() {
         top: 0,
         left: 0,
         width: `${progress}%`,
-        height: '2px',
+        height: '3px',
         backgroundColor: 'var(--accent)',
-        zIndex: 60,
-        transition: 'width 0.1s ease-out',
+        zIndex: 9999,
+        transition: 'width 0.15s ease-out',
+        pointerEvents: 'none',
       }}
     />
   )
 }
+
