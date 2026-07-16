@@ -22,10 +22,10 @@ export default function About() {
             About
           </p>
           <h1
-            className="font-['Playfair_Display'] text-5xl sm:text-6xl font-bold mb-3 leading-tight"
+            className="font-['Playfair_Display'] text-3xl sm:text-4xl font-bold mb-3 leading-tight"
             style={{ color: 'var(--text-heading)' }}
           >
-            The human behind<br />the code
+            Ship fast. Learn faster.
           </h1>
           <div
             className="w-12 h-[2px] rounded-full mt-4"
