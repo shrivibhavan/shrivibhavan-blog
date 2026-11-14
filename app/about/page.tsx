@@ -1,6 +1,5 @@
 import NewsletterForm from '@/components/NewsletterForm'
 import Image from 'next/image'
-import DubaiClock from '@/components/DubaiClock'
 
 export const metadata = {
   title: 'About — Shrivibhavan',
@@ -32,9 +31,6 @@ export default function About() {
             className="w-12 h-[2px] rounded-full mt-4"
             style={{ background: 'var(--accent)' }}
           />
-          <div className="mt-5">
-            <DubaiClock />
-          </div>
         </div>
         <div className="relative flex-shrink-0 about-avatar">
           {/* Glow ring behind avatar */}
