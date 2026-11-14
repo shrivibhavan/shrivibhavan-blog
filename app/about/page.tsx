@@ -1,5 +1,6 @@
 import NewsletterForm from '@/components/NewsletterForm'
 import Image from 'next/image'
+import DubaiClock from '@/components/DubaiClock'
 
 export const metadata = {
   title: 'About — Shrivibhavan',
@@ -31,8 +32,11 @@ export default function About() {
             className="w-12 h-[2px] rounded-full mt-4"
             style={{ background: 'var(--accent)' }}
           />
+          <div className="mt-5">
+            <DubaiClock />
+          </div>
         </div>
-        <div className="relative flex-shrink-0">
+        <div className="relative flex-shrink-0 about-avatar">
           {/* Glow ring behind avatar */}
           <div
             className="absolute -inset-1 rounded-full opacity-30 blur-md"
@@ -76,7 +80,7 @@ export default function About() {
             href="https://github.com/shrivibhavan"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 no-underline group rounded-xl p-4 border transition-all hover:shadow-md"
+            className="social-card social-card--github flex items-center gap-3 no-underline group rounded-xl p-4 border"
             style={{
               color: 'var(--text-secondary)',
               borderColor: 'var(--border)',
@@ -84,7 +88,7 @@ export default function About() {
             }}
           >
             <span
-              className="w-10 h-10 rounded-xl flex items-center justify-center transition-all group-hover:scale-110"
+              className="social-card-icon w-10 h-10 rounded-xl flex items-center justify-center"
               style={{ background: 'var(--accent-soft)', color: 'var(--accent)' }}
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -95,6 +99,10 @@ export default function About() {
               <span className="text-sm font-medium block" style={{ color: 'var(--text)' }}>GitHub</span>
               <span className="text-xs" style={{ color: 'var(--text-faint)' }}>@shrivibhavan</span>
             </div>
+            <svg className="social-card-arrow ml-auto" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M7 17 17 7" />
+              <path d="M7 7h10v10" />
+            </svg>
           </a>
 
           {/* LinkedIn */}
@@ -102,7 +110,7 @@ export default function About() {
             href="https://www.linkedin.com/in/shrivibhavan"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 no-underline group rounded-xl p-4 border transition-all hover:shadow-md"
+            className="social-card social-card--linkedin flex items-center gap-3 no-underline group rounded-xl p-4 border"
             style={{
               color: 'var(--text-secondary)',
               borderColor: 'var(--border)',
@@ -110,7 +118,7 @@ export default function About() {
             }}
           >
             <span
-              className="w-10 h-10 rounded-xl flex items-center justify-center transition-all group-hover:scale-110"
+              className="social-card-icon w-10 h-10 rounded-xl flex items-center justify-center"
               style={{ background: 'var(--accent-soft)', color: 'var(--accent)' }}
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -123,6 +131,10 @@ export default function About() {
               <span className="text-sm font-medium block" style={{ color: 'var(--text)' }}>LinkedIn</span>
               <span className="text-xs" style={{ color: 'var(--text-faint)' }}>in/shrivibhavan</span>
             </div>
+            <svg className="social-card-arrow ml-auto" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M7 17 17 7" />
+              <path d="M7 7h10v10" />
+            </svg>
           </a>
 
           {/* X (Twitter) */}
@@ -130,7 +142,7 @@ export default function About() {
             href="https://x.com/_shrivibhavan"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 no-underline group rounded-xl p-4 border transition-all hover:shadow-md"
+            className="social-card social-card--x flex items-center gap-3 no-underline group rounded-xl p-4 border"
             style={{
               color: 'var(--text-secondary)',
               borderColor: 'var(--border)',
@@ -138,7 +150,7 @@ export default function About() {
             }}
           >
             <span
-              className="w-10 h-10 rounded-xl flex items-center justify-center transition-all group-hover:scale-110"
+              className="social-card-icon w-10 h-10 rounded-xl flex items-center justify-center"
               style={{ background: 'var(--accent-soft)', color: 'var(--accent)' }}
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -149,6 +161,10 @@ export default function About() {
               <span className="text-sm font-medium block" style={{ color: 'var(--text)' }}>X (Twitter)</span>
               <span className="text-xs" style={{ color: 'var(--text-faint)' }}>@_shrivibhavan</span>
             </div>
+            <svg className="social-card-arrow ml-auto" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M7 17 17 7" />
+              <path d="M7 7h10v10" />
+            </svg>
           </a>
 
           {/* Instagram */}
@@ -156,7 +172,7 @@ export default function About() {
             href="https://instagram.com/shrivibhavana"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 no-underline group rounded-xl p-4 border transition-all hover:shadow-md"
+            className="social-card social-card--instagram flex items-center gap-3 no-underline group rounded-xl p-4 border"
             style={{
               color: 'var(--text-secondary)',
               borderColor: 'var(--border)',
@@ -164,7 +180,7 @@ export default function About() {
             }}
           >
             <span
-              className="w-10 h-10 rounded-xl flex items-center justify-center transition-all group-hover:scale-110"
+              className="social-card-icon w-10 h-10 rounded-xl flex items-center justify-center"
               style={{ background: 'var(--accent-soft)', color: 'var(--accent)' }}
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -177,12 +193,16 @@ export default function About() {
               <span className="text-sm font-medium block" style={{ color: 'var(--text)' }}>Instagram</span>
               <span className="text-xs" style={{ color: 'var(--text-faint)' }}>@shrivibhavana</span>
             </div>
+            <svg className="social-card-arrow ml-auto" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M7 17 17 7" />
+              <path d="M7 7h10v10" />
+            </svg>
           </a>
 
           {/* Email — full width */}
           <a
             href="mailto:hello@shrivibhavan.com"
-            className="flex items-center gap-3 no-underline group rounded-xl p-4 border transition-all hover:shadow-md sm:col-span-2"
+            className="social-card social-card--email flex items-center gap-3 no-underline group rounded-xl p-4 border sm:col-span-2"
             style={{
               color: 'var(--text-secondary)',
               borderColor: 'var(--border)',
@@ -190,7 +210,7 @@ export default function About() {
             }}
           >
             <span
-              className="w-10 h-10 rounded-xl flex items-center justify-center transition-all group-hover:scale-110"
+              className="social-card-icon w-10 h-10 rounded-xl flex items-center justify-center"
               style={{ background: 'var(--accent-soft)', color: 'var(--accent)' }}
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -202,6 +222,10 @@ export default function About() {
               <span className="text-sm font-medium block" style={{ color: 'var(--text)' }}>Email</span>
               <span className="text-xs" style={{ color: 'var(--text-faint)' }}>hello@shrivibhavan.com</span>
             </div>
+            <svg className="social-card-arrow ml-auto" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M7 17 17 7" />
+              <path d="M7 7h10v10" />
+            </svg>
           </a>
         </div>
 
